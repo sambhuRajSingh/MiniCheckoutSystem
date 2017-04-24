@@ -1,0 +1,11 @@
+{
+    "name": "Project/MiniCheckoutSystem",
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MiniCheckoutSystem\\": "app/"
+        }
+    }
+}
