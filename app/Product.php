@@ -4,14 +4,14 @@ namespace MiniCheckoutSystem;
 
 class Product
 {
-    public $productCode;
-    public $productName;
-    public $productPrice;
+    public $code;
+    public $name;
+    public $price;
 
-    public function __construct($productCode, $productName, $productPrice)
+    public function __construct($code, $name, $price)
     {
-        $this->productCode = $productCode;
-        $this->productName = $productName;
-        $this->productPrice = $productPrice;
+        $this->code = $code;
+        $this->name = $name;
+        $this->price = $price;
     }
 }
