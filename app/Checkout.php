@@ -3,6 +3,7 @@
 namespace MiniCheckoutSystem;
 
 use MiniCheckoutSystem\PricingRules;
+use MiniCheckoutSystem\Product;
 
 class Checkout
 {
@@ -14,7 +15,7 @@ class Checkout
         $this->pricingRules = $pricingRules;
     }
 
-    public function scan($product)
+    public function scan(Product $product)
     {
         if (isset($this->basket[$product->code])) {
             $this->basket[$product->code]['quantity'] += 1;
@@ -27,20 +28,17 @@ class Checkout
     public function getTotal()
     {
         foreach ($this->basket as $code => $product) {
-            $price = $product['price'];
             if ($code == 'SR1') {
-                $price = $this->pricingRules->reducePrice($product);
-                $this->total += $price * $product['quantity'];
+                $this->total += $this->pricingRules->reducePrice($product);
                 continue;
             }
 
             if ($code == 'FR1') {
-                $price = $this->pricingRules->buyOneGetOne($product);
-                $this->total += $price;
+                $this->total += $this->pricingRules->buyOneGetOne($product);
                 continue;
             }
 
-            $this->total += $price * $product['quantity'];
+            $this->total += $product['price'] * $product['quantity'];
         }
 
         return $this->total;

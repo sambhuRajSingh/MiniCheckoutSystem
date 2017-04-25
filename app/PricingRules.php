@@ -19,9 +19,9 @@ class PricingRules
     public function reducePrice($product)
     {
         if ($product['quantity'] >= 3) {
-            return $product['price'] = 4.50;
+            $product['price'] = 4.50;
         }
 
-        return $product['price'];
+        return $product['quantity'] * $product['price'];
     }
 }
