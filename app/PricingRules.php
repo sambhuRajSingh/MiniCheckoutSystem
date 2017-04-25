@@ -19,7 +19,6 @@ class PricingRules
     public function reducePrice($product)
     {
         if ($product['quantity'] >= 3) {
-            echo "greater than or equal to three";
             return $product['price'] = 4.50;
         }
 
