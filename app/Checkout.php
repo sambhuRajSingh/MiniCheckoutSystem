@@ -2,9 +2,6 @@
 
 namespace MiniCheckoutSystem;
 
-use MiniCheckoutSystem\PricingRules;
-use MiniCheckoutSystem\Product;
-
 class Checkout
 {
     public $total = 0;
