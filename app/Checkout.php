@@ -7,11 +7,6 @@ class Checkout
     public $total = 0;
     public $basket = [];
 
-    public function __construct(PricingRules $pricingRules)
-    {
-        $this->pricingRules = $pricingRules;
-    }
-
     public function scan(Product $product)
     {
         if (isset($this->basket[$product->code])) {
@@ -25,17 +20,14 @@ class Checkout
     public function getTotal()
     {
         foreach ($this->basket as $code => $product) {
-            if ($code == 'SR1') {
-                $this->total += $this->pricingRules->reducePrice($product);
-                continue;
-            }
 
-            if ($code == 'FR1') {
-                $this->total += $this->pricingRules->buyOneGetOne($product);
-                continue;
-            }
+            $class = __NAMESPACE__ . '\\' . $code . 'PricingRules';
 
-            $this->total += $product['price'] * $product['quantity'];
+            if(class_exists($class)) {
+                $this->total += (new $class)->offer($product);
+            } else {
+                $this->total += $product['price'] * $product['quantity'];
+            }
         }
 
         return $this->total;

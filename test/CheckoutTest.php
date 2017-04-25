@@ -4,7 +4,6 @@ namespace test;
 
 use MiniCheckoutSystem\Product;
 use PHPUnit_Framework_TestCase;
-use MiniCheckoutSystem\PricingRules;
 use MiniCheckoutSystem\Items;
 use MiniCheckoutSystem\Checkout;
 
@@ -12,13 +11,11 @@ class CheckoutTest extends PHPUnit_Framework_TestCase
 {
     public function testGivenPurchasingThreeItemsOfFruitTeaShouldGiveBuyOneGetOneFree()
     {
-        $pricingRules = new PricingRules();
+        $fruitTea = new Product('FR', 'Fruit tea', 3.11);
+        $strawberries = new Product('SR', 'Strawberries', 5.00);
+        $coffee = new Product('CF', 'Coffee', 11.23);
 
-        $fruitTea = new Product('FR1', 'Fruit tea', 3.11);
-        $strawberries = new Product('SR1', 'Strawberries', 5.00);
-        $coffee = new Product('CF1', 'Coffee', 11.23);
-
-        $checkout = new Checkout($pricingRules);
+        $checkout = new Checkout();
 
         $checkout->scan($fruitTea);
         $checkout->scan($strawberries);
@@ -32,11 +29,9 @@ class CheckoutTest extends PHPUnit_Framework_TestCase
 
     public function testGivenPurchasingTwoItemsOfFruitTeaShouldGiveOneFreeItem()
     {
-        $pricingRules = new PricingRules();
+        $fruitTea = new Product('FR', 'Fruit tea', 3.11);
 
-        $fruitTea = new Product('FR1', 'Fruit tea', 3.11);
-
-        $checkout = new Checkout($pricingRules);
+        $checkout = new Checkout();
 
         $checkout->scan($fruitTea);
         $checkout->scan($fruitTea);
@@ -47,12 +42,10 @@ class CheckoutTest extends PHPUnit_Framework_TestCase
 
     public function testGivenPurchasingThreeItemsOfStrawberriesShouldReducePriceOfStrawberry()
     {
-        $pricingRules = new PricingRules();
+        $fruitTea = new Product('FR', 'Fruit tea', 3.11);
+        $strawberries = new Product('SR', 'Strawberries', 5.00);
 
-        $fruitTea = new Product('FR1', 'Fruit tea', 3.11);
-        $strawberries = new Product('SR1', 'Strawberries', 5.00);
-
-        $checkout = new Checkout($pricingRules);
+        $checkout = new Checkout();
 
         $checkout->scan($strawberries);
         $checkout->scan($strawberries);
